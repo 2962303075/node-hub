@@ -74,13 +74,14 @@
     const fragment = document.createDocumentFragment()
     nodes.forEach(node => {
       const card = document.createElement('article')
-      card.className = `node-card${node.online ? '' : ' is-offline'}`
+      card.className = `node-card${node.online && !isFull ? '' : ' is-offline'}`
       const statusText = node.online ? '运行中' : '暂时离线'
       const count = Number(node.usersCount || 0)
       const max = Number(node.maxUsers || 0)
-      const full = node.full === true || node.canAddAccount === false
+      const isFull = max > 0 && count >= max
+      const full = node.full === true || node.canAddAccount === false || isFull
       const canEnter = node.online === true && !full && normalizeUrl(node.url)
-      const capacityText = node.canAddAccount === false ? '当前负载已满' : (full ? '节点已满' : statusText)
+      const capacityText = isFull ? '已爆满' : (node.canAddAccount === false ? '当前负载已满' : (full ? '节点已满' : statusText))
       card.innerHTML = `<div class="node-card__top"><strong>${escapeHtml(node.name || '未命名节点')}</strong><span class="node-status"><i></i>${escapeHtml(capacityText)}</span></div><div class="node-card__meta"><span>在线用户 ${count}${max > 0 ? ` / ${max}` : ''}</span></div><div class="node-card__action">${canEnter ? `<a class="node-enter" href="${escapeHtml(normalizeUrl(node.url))}" target="_blank" rel="noopener">进入节点<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg></a>` : `<span class="node-enter is-disabled">${node.canAddAccount === false ? '当前负载已满' : (full ? '节点已满' : '暂不可进入')}</span>`}</div>`
       fragment.appendChild(card)
     })
