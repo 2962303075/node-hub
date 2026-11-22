@@ -1,5 +1,5 @@
 window.QQFARM_PORTAL_CONFIG = {
-  refreshIntervalMs: 60000,
+  refreshIntervalMs: 30000,
   visibilityCacheVersion: 12,
   // 静态托管（GitHub Pages）：不走后端 API，直接用下面的 nodes 配置
   nodesApiUrl: false,
