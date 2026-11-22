@@ -139,16 +139,18 @@
     {
       name: '线路一',
       badge: '推荐',
-      label: '标准线路',
-      probe: 'https://qq.29sml.cn/api/public/stats',
-      url: 'https://qq.29sml.cn'
+      label: '主力线路（IP 直连）',
+      probe: null,
+      url: 'http://36.133.116.183:88',
+      desc: '36.133.116.183:88'
     },
     {
       name: '线路二',
-      badge: '直连',
+      badge: '备用',
       label: '备用线路（IP 直连）',
       probe: null,
-      url: 'http://36.137.25.32:88'
+      url: 'http://36.137.25.32:88',
+      desc: '36.137.25.32:88'
     }
   ];
 
@@ -181,7 +183,7 @@
       if (!dot || !info) return;
       if (!n.probe) {
         dot.className = 'dot';
-        info.textContent = n.label;
+        info.textContent = n.desc ? n.label + ' · ' + n.desc : n.label;
         return;
       }
       dot.className = 'dot busy';
