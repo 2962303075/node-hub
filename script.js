@@ -81,7 +81,7 @@
       const full = node.full === true || node.canAddAccount === false
       const canEnter = node.online === true && !full && normalizeUrl(node.url)
       const capacityText = node.canAddAccount === false ? '当前负载已满' : (full ? '节点已满' : statusText)
-      card.innerHTML = `<div class="node-card__top"><strong>${escapeHtml(node.name || '未命名节点')}</strong><span class="node-status"><i></i>${escapeHtml(capacityText)}</span></div><div class="node-card__meta"><span>在线用户 ${count}${max > 0 ? ` / ${max}` : ''}</span><span>${node.bestEnabled ? '支持自动分配' : '手动节点'}</span></div><div class="node-card__action">${canEnter ? `<a class="node-enter" href="${escapeHtml(normalizeUrl(node.url))}" target="_blank" rel="noopener">进入节点<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg></a>` : `<span class="node-enter is-disabled">${node.canAddAccount === false ? '当前负载已满' : (full ? '节点已满' : '暂不可进入')}</span>`}</div>`
+      card.innerHTML = `<div class="node-card__top"><strong>${escapeHtml(node.name || '未命名节点')}</strong><span class="node-status"><i></i>${escapeHtml(capacityText)}</span></div><div class="node-card__meta"><span>在线用户 ${count}${max > 0 ? ` / ${max}` : ''}</span></div><div class="node-card__action">${canEnter ? `<a class="node-enter" href="${escapeHtml(normalizeUrl(node.url))}" target="_blank" rel="noopener">进入节点<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg></a>` : `<span class="node-enter is-disabled">${node.canAddAccount === false ? '当前负载已满' : (full ? '节点已满' : '暂不可进入')}</span>`}</div>`
       fragment.appendChild(card)
     })
     nodesList.appendChild(fragment)
@@ -104,7 +104,7 @@
           nodes = nodes.map((n, i) => {
             const s = i === 0 ? stats.n1 : (i === 1 ? stats.n2 : null)
             if (s && s.ok) {
-              return { ...n, usersCount: Number(s.online) || 0, maxUsers: Number(s.accounts) || 0 }
+              return { ...n, usersCount: Number(s.online) || 0 }
             }
             return n
           })
