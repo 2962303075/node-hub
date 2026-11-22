@@ -95,8 +95,29 @@
   async function loadNodes() {
     // 纯静态托管（如 GitHub Pages）时，直接使用 portal.config.js 里配置的节点
     if (Array.isArray(config.nodes) && config.nodes.length > 0) {
-      renderNodes(config.nodes)
-      nodesUpdated.textContent = `${config.nodes.length} 条线路`
+      let nodes = config.nodes
+      // stats.json 由服务器定时任务生成，包含两个节点的实时在线数
+      try {
+        const res = await fetch(`./stats.json?v=${Date.now()}`, { cache: 'no-store' })
+        if (res.ok) {
+          const stats = await res.json()
+          nodes = nodes.map((n, i) => {
+            const s = i === 0 ? stats.n1 : (i === 1 ? stats.n2 : null)
+            if (s && s.ok) {
+              return { ...n, usersCount: Number(s.online) || 0, maxUsers: Number(s.accounts) || 0 }
+            }
+            return n
+          })
+          if (stats.updatedAt) {
+            const t = new Date(stats.updatedAt)
+            nodesUpdated.textContent = `更新于 ${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`
+          }
+        }
+      } catch {}
+      renderNodes(nodes)
+      if (!nodesUpdated.textContent || nodesUpdated.textContent.indexOf('更新于') < 0) {
+        nodesUpdated.textContent = `${nodes.length} 条线路`
+      }
       return
     }
     try {
