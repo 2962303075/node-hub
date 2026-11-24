@@ -1,12 +1,12 @@
 window.QQFARM_PORTAL_CONFIG = {
   refreshIntervalMs: 30000,
-  visibilityCacheVersion: 12,
+  visibilityCacheVersion: 13,
   // 静态托管（GitHub Pages）：不走后端 API，直接用下面的 nodes 配置
   nodesApiUrl: false,
   nodes: [
     {
       name: '线路一 · 主力',
-      url: 'http://36.133.116.183:88',
+      url: 'http://36.133.116.183:3027',
       online: true,
       usersCount: 0,
       maxUsers: 150,
@@ -15,7 +15,7 @@ window.QQFARM_PORTAL_CONFIG = {
     },
     {
       name: '线路二 · 备用',
-      url: 'http://36.137.25.32:88',
+      url: 'http://36.137.25.32:3007',
       online: true,
       usersCount: 0,
       maxUsers: 300,
