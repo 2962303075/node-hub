@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-25T04:10:01.796Z",
+  "updatedAt": "2026-11-25T04:20:01.500Z",
   "n1": {
     "ok": true,
-    "online": 130,
-    "accounts": 327,
+    "online": 133,
+    "accounts": 328,
     "nodeName": "节点一"
   },
   "n2": {
