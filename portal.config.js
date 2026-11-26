@@ -17,7 +17,7 @@ window.QQFARM_PORTAL_CONFIG = {
       name: '线路二 · 备用',
       url: 'http://36.137.25.32:3007',
       online: true,
-      usersCount: 24,
+      usersCount: 25,
       maxUsers: 300,
       canAddAccount: true,
       bestEnabled: false,
