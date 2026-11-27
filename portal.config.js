@@ -8,7 +8,7 @@ window.QQFARM_PORTAL_CONFIG = {
       name: '线路一 · 主力',
       url: 'http://36.133.116.183:3027',
       online: true,
-      usersCount: 209,
+      usersCount: 207,
       maxUsers: 150,
       canAddAccount: true,
       bestEnabled: true,
